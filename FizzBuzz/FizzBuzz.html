@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+</head>
+<body ng-app="app">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4" 
+				 ng-controller="FizzBuzzController">
+			<h1>FizzBuzz</h1>
+			Range: {{ range }}<br>
+			<input name="slider" type="range" min="1" max="500" step="1" ng-model="range" ng-change="retrurnArray(range)"><br>
+			{{ myArray }}
+    </div>
+  </div>
+</div>
+<script>
+(function() {
+    let app = angular.module('app', []);
+
+    app.controller('FizzBuzzController', function($scope){
+        $scope.range = 20;
+        $scope.myArray = '';
+        
+        $scope.retrurnArray = function(range){
+            let echo = '';
+            for (i = 1; i <= range; i++) {
+                let output = "";
+                if( i % 3 == 0 ){
+                    output += 'Fizz';
+                }; 
+                if ( i % 5 == 0 ){
+                    output += 'Buzz';
+                } 
+                if( output === "") {
+                    echo +=(i+', ')
+                } else {
+                    echo +=(output+', ');
+                }
+            }
+            $scope.myArray = echo;
+        };
+        
+         $scope.retrurnArray($scope.range);
+    });
+})();
+
+</script>
+</body>
+</html>
